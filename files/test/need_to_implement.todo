@@ -1,0 +1,16 @@
+# Must be done
+
+[x] The window must be closed using events.
+[x] The program must manage the inout fril tthe keyboard
+[x] The program must contain animated sprites rendered thanks to sprite elements
+[x] The program must contain moving (rotating, translating or scaling) elements.
+[x] The program background must include a prarallax scrolling with at least 3 objects moving at different speeds.
+[o] The program must take a file in argument which will contain the map of your current game.
+[x] The program must display a score wich is updated regularly during the game.
+[x] The program must have an end wether it's a victory of a defeat.
+[x] The program must handle basic game physics (jumping/falling/hitting a wall).
+[x] The program must have at least one music and one sound effect.
+
+# Should be done
+
+# Could be done

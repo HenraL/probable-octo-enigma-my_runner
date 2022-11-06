@@ -1,0 +1,130 @@
+
+
+#include <stdlib.h>
+#include "include/my_window.h"
+#include "include/my_lib.h"
+#include "include/my_maths.h"
+#include "include/my_sprite.h"
+
+int main(void)
+{
+    
+    
+    char *background_image_path = "img/background/Background.png";
+    char *background_image_path2 = "img/background/block.jpg";
+    
+    char *path_image_path = "img/background/path.png";
+    
+    char *ice_image_path = "img/background/ice.png";
+    sfRenderWindow *window;
+    framebuffer_t *fb;
+    
+    int max_width = 1920;
+    int max_height = 1080;
+
+
+    two_sprites_t bkgd_sprites = load_two_sprite(background_image_path,
+                                                 background_image_path,
+                                                 1, 0.5);
+    
+    two_sprites_t path_sprites = load_two_sprite(path_image_path,
+                                                 path_image_path, 1, 0.5);
+    
+    two_sprites_t ice_sprites = load_two_sprite(ice_image_path, ice_image_path,
+                                                1, 0.5);
+    
+    sfEvent event;
+    
+    
+    if (bkgd_sprites.status == 84) {
+        return 84;
+    }
+    
+    if (path_sprites.status == 84) {
+        return 84;
+    }
+    
+    if (ice_sprites.status == 84) {
+        return 84;
+    }
+    
+    
+    bkgd_sprites.sprite_widths = 1500;
+    bkgd_sprites.sprite_heights = 700;
+    
+    path_sprites.sprite_widths = 1920;
+    path_sprites.sprite_heights = 219;
+    
+    ice_sprites.sprite_widths = 1920;
+    ice_sprites.sprite_heights = 219;
+    
+    
+    bkgd_sprites = initialise_drag_axis(bkgd_sprites, 0);
+    bkgd_sprites.s2_x = bkgd_sprites.sprite_widths;
+    
+    path_sprites = initialise_drag_axis(path_sprites, 0);
+    path_sprites.indent_level = 350;
+    path_sprites.s1_y = path_sprites.indent_level;
+    path_sprites.s2_x = path_sprites.sprite_widths;
+    path_sprites.s2_y = path_sprites.indent_level;
+    
+    ice_sprites = initialise_drag_axis(ice_sprites, 0);
+    ice_sprites.indent_level = path_sprites.indent_level + 125;
+    ice_sprites.s1_y = ice_sprites.indent_level;
+    ice_sprites.s2_x = ice_sprites.sprite_widths;
+    ice_sprites.s2_y = ice_sprites.indent_level;
+    printf("bs1_x = %d\n", bkgd_sprites.s1_x);
+    printf("bs2_x = %d\n", bkgd_sprites.s2_x);
+    
+    window = createWindow(max_width, max_height);
+    fb = framebuffer_create(max_width, max_height);
+    while (sfRenderWindow_isOpen(window)) {
+        while (sfRenderWindow_pollEvent(window, &event))
+        {
+            
+            if (event.type == sfEvtClosed)
+                sfRenderWindow_close(window);
+        }
+        
+        
+        bkgd_sprites = move_two_sprites(bkgd_sprites);
+        
+        path_sprites = move_two_sprites(path_sprites);
+        
+        ice_sprites = move_two_sprites(ice_sprites);
+        
+        
+        draw_two_sprites(window, bkgd_sprites, NULL);
+        
+        draw_two_sprites(window, path_sprites, NULL);
+        
+        draw_two_sprites(window, ice_sprites, NULL);
+        
+        sfRenderWindow_display(window);
+        sfRenderWindow_clear(window, sfBlack);
+        
+        bkgd_sprites = is_reset_drag_needed(bkgd_sprites, max_width);
+        
+        path_sprites = is_reset_drag_needed(path_sprites, max_width);
+        
+        ice_sprites = is_reset_drag_needed(ice_sprites, max_width);
+        
+        
+        bkgd_sprites = change_two_val(bkgd_sprites, 0, 1);
+        
+        path_sprites = change_two_val(path_sprites, 0, 5);
+        
+        ice_sprites = change_two_val(ice_sprites, 0, 10);
+        sfRenderWindow_setFramerateLimit(window, 120);
+    }
+    sfRenderWindow_destroy(window);
+    framebuffer_destroy(fb);
+    
+    
+    free_two_sprites(bkgd_sprites);
+    
+    free_two_sprites(path_sprites);
+    
+    free_two_sprites(ice_sprites);
+}
+

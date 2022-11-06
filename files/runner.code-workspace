@@ -1,0 +1,70 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": ".",
+        "liveServer.settings.port": 5501,
+        "files.associations": {
+            "*.txt": "plaintext",
+            "my_window.h": "c",
+            "audio.h": "c",
+            "graphics.h": "c",
+            "MOVE.C": "cpp",
+            "event.h": "c",
+            "my_text.h": "c",
+            "structs.h": "c",
+            "init.C": "cpp",
+            "my_mouse.h": "c",
+            "my_event.h": "c",
+            "my_scores.h": "c",
+            "my_audio.h": "c",
+            "window.h": "c",
+            "my_image.h": "c"
+        },
+        "git.ignoreLimitWarning": true,
+        "cSpell.enabledLanguageIds": [
+            "asciidoc",
+            "c",
+            "cpp",
+            "csharp",
+            "css",
+            "elixir",
+            "git-commit",
+            "go",
+            "graphql",
+            "handlebars",
+            "haskell",
+            "html",
+            "jade",
+            "java",
+            "javascript",
+            "javascriptreact",
+            "json",
+            "jsonc",
+            "jupyter",
+            "latex",
+            "less",
+            "markdown",
+            "php",
+            "plaintext",
+            "python",
+            "pug",
+            "restructuredtext",
+            "rust",
+            "scala",
+            "scss",
+            "swift",
+            "text",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "yaml",
+            "yml",
+            "COBOL",
+            "ACUCOBOL"
+        ]
+    }
+}

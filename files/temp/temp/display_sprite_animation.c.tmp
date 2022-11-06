@@ -1,0 +1,417 @@
+
+
+
+#include <SFML/Graphics/RenderWindow.h>
+
+
+#include <stdlib.h>
+#include "include/my_window.h"
+#include "include/my_lib.h"
+#include "include/my_maths.h"
+#include "include/my_sprite.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main2(void)
+{
+    char *image_path = "sprite_test copy.png";
+    sfRenderWindow *window;
+    framebuffer_t *fb;
+    sprite_t sprite;
+    sfEvent event;
+    int x = 0;
+    int y = 0;
+    int count_x = 0;
+    int count_y = 0;
+    int factor = 0;
+    
+    window = createWindow(800, 800);
+    fb = framebuffer_create(800, 800);
+    while (sfRenderWindow_isOpen(window)) {
+        while (sfRenderWindow_pollEvent(window, &event))
+        {
+            
+            if (event.type == sfEvtClosed)
+                sfRenderWindow_close(window);
+        }
+        
+        sprite = load_sprite(image_path);
+        if (sprite.status == 84) {
+            return 84;
+        }
+
+        
+        sfTexture_updateFromPixels(sprite.texture,
+                                   fb->pixels,
+                                   800, 800,
+                                   0, 0);
+        sprite = move_sprite(sprite, x, y);
+        
+        sprite = rescale_sprite_by_percent(sprite, factor, 1);
+        
+        
+        
+        
+        
+        sfRenderWindow_drawSprite(window, sprite.sprite, NULL);
+        
+        sfRenderWindow_display(window);
+        x++;
+        y++;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        if (factor < 101) {
+            factor++;
+        }
+    }
+    sfRenderWindow_destroy(window);
+    framebuffer_destroy(fb);
+    sfTexture_destroy(sprite.texture);
+    sfSprite_destroy(sprite.sprite);
+
+}
+
+int main(void)
+{
+    
+    
+    char *background_image_path = "img/background/Background.png";
+    char *background_image_path2 = "img/background/block.jpg";
+    
+    char *path_image_path = "img/background/path.png";
+    
+    char *ice_image_path = "img/background/ice.png";
+    sfRenderWindow *window;
+    framebuffer_t *fb;
+    
+    int max_width = 1500;
+    int max_height = 700;
+    
+    
+    sprite_t background_sprite1;
+    sprite_t background_sprite2;
+    
+    
+    sprite_t path_sprite1;
+    sprite_t path_sprite2;
+    
+    sprite_t ice_sprite1;
+    sprite_t ice_sprite2;
+    
+    sfEvent event;
+    
+    
+    background_sprite1 = load_sprite(background_image_path);
+    if (background_sprite1.status == 84) {
+        return 84;
+    }
+    background_sprite2 = load_sprite(background_image_path);
+    if (background_sprite2.status == 84) {
+        return 84;
+    }
+    
+    
+    
+    
+    printf("background_sprite1.previous_scale_x = %.8f\n", background_sprite1.previous_scale_x);
+    printf("background_sprite2.previous_scale_x = %.8f\n", background_sprite2.previous_scale_x);
+    
+    
+    path_sprite1 = load_sprite(path_image_path);
+    if (path_sprite1.status == 84) {
+        return 84;
+    }
+    path_sprite2 = load_sprite(path_image_path);
+    if (path_sprite2.status == 84) {
+        return 84;
+    }
+    
+    ice_sprite1 = load_sprite(ice_image_path);
+    if (ice_sprite1.status == 84) {
+        return 84;
+    }
+    ice_sprite2 = load_sprite(ice_image_path);
+    if (ice_sprite2.status == 84) {
+        return 84;
+    }
+    
+    
+    int background_image_width = 1500;
+    int background_image_height = 700;
+    
+    int path_image_width = 1500;
+    int path_image_height = 700;
+    
+    int ice_image_width = 1500;
+    int ice_image_height = 700;
+    
+    
+    background_sprite1 = rescale_sprite(background_sprite1, 1, 0.5);
+    background_sprite2 = rescale_sprite(background_sprite2, 1, 0.5);
+    
+
+    
+    path_sprite1 = rescale_sprite(path_sprite1, 1, 0.5);
+    path_sprite2 = rescale_sprite(path_sprite2, 1, 0.5);
+    
+    ice_sprite1 = rescale_sprite(ice_sprite1, 1, 0.5);
+    ice_sprite2 = rescale_sprite(ice_sprite2, 1, 0.5);
+    
+    
+    int bs1_x = 0;
+    int bs1_y = 0;
+    int bs2_x = background_image_width;
+    int bs2_y = 0;
+    
+    
+    
+    int p_indent_level = 350;
+    int ps1_x = 0;
+    int ps1_y = 0 + p_indent_level;
+    int ps2_x = path_image_width;
+    int ps2_y = 0 + p_indent_level;
+    
+    int i_indent_level = p_indent_level + 125;
+    int is1_x = 0;
+    int is1_y = 0 + i_indent_level;
+    int is2_x = ice_image_width;
+    int is2_y = 0 + i_indent_level;
+
+    int count_x = 0;
+    int count_y = 0; 
+    int factor = 0;
+    printf("bs1_x = %d\n", bs1_x);
+    printf("bs2_x = %d\n", bs2_x);
+    
+    
+    window = createWindow(max_width, max_height);
+    fb = framebuffer_create(max_width, max_height);
+    while (sfRenderWindow_isOpen(window)) {
+        while (sfRenderWindow_pollEvent(window, &event))
+        {
+            
+            if (event.type == sfEvtClosed)
+                sfRenderWindow_close(window);
+        }
+        
+        
+        background_sprite1 = move_sprite(background_sprite1, bs1_x, bs1_y);
+        background_sprite2 = move_sprite(background_sprite2, bs2_x, bs2_y);
+        
+        
+        path_sprite1 = move_sprite(path_sprite1, ps1_x, ps1_y);
+        path_sprite2 = move_sprite(path_sprite2, ps2_x, ps2_y);
+        
+        ice_sprite1 = move_sprite(ice_sprite1, is1_x, is1_y);
+        ice_sprite2 = move_sprite(ice_sprite2, is2_x, is2_y);
+        
+        
+        sfRenderWindow_drawSprite(window, background_sprite1.sprite, NULL);
+        sfRenderWindow_drawSprite(window, background_sprite2.sprite, NULL);
+        
+        
+        sfRenderWindow_drawSprite(window, path_sprite1.sprite, NULL);
+        sfRenderWindow_drawSprite(window, path_sprite2.sprite, NULL);
+        
+        sfRenderWindow_drawSprite(window, ice_sprite1.sprite, NULL);
+        sfRenderWindow_drawSprite(window, ice_sprite2.sprite, NULL);
+        
+        sfRenderWindow_display(window);
+        sfRenderWindow_clear(window, sfBlack);
+        
+        
+        
+        
+        
+        
+        if (bs1_x <= (background_image_width * -1)) {
+            
+            bs1_x = max_width;
+            
+        }
+        if (bs2_x <= (background_image_width * -1)) {
+            
+            bs2_x = max_width;
+            
+        }
+        
+            
+            
+        
+        
+        if (ps1_x <= (path_image_width * -1)) {
+            ps1_x = max_width;
+        }
+        if (ps2_x <= (path_image_width * -1)) {
+            ps1_x = max_width;
+        }
+        
+        if (is1_x <= (ice_image_width * -1)) {
+            is1_x = max_width;
+        }
+        if (is2_x <= (ice_image_width * -1)) {
+            is1_x = max_width;
+        }
+        
+        
+        bs1_x -= 1;
+        bs2_x -= 1;
+        
+        
+        ps1_x -= 5;
+        ps2_x -= 5;
+        
+        is1_x -= 10;
+        is2_x -= 10;
+        sfRenderWindow_setFramerateLimit(window, 120);
+    }
+    sfRenderWindow_destroy(window);
+    framebuffer_destroy(fb);
+    
+    
+    free_sprite(background_sprite1);
+    free_sprite(background_sprite2);
+    
+    
+    free_sprite(path_sprite1);
+    free_sprite(path_sprite2);
+    
+    free_sprite(ice_sprite1);
+    free_sprite(ice_sprite2);
+}
+

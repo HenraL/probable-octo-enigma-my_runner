@@ -1,0 +1,76 @@
+# Structure
+    [!] element
+        [!] type, (blocking | killing) [0 | 1]
+        [!] id
+        [-] pos_x,
+        [!] pos_y,
+        [!] clock
+        [!] | (end)
+
+# Structure in level_file
+    id,clock,pos_y,|
+    [-] element
+        [-] type, (blocking | killing) [0 | 1]
+        [!] id,
+        [-] pos_x,
+        [!] clock
+        [!] pos_y,
+        [!] | (end)
+
+# elements:
+    [o] 1 ice_block
+        [type] blocking
+        [id] 1
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 2 ice_cube_block
+        [type] blocking
+        [id] 2
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 3 platform 
+        [type] blocking
+        [id] 3
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 4 asteroid
+        [type] Killing
+        [id] 4
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 5 bomb
+        [type] killing
+        [id] 5
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 6 Frozen river
+        [type] killing
+        [id] 6
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 7 mine
+        [type] killing
+        [id] 7
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 8 rocket
+        [type] killing
+        [id] 8
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+    [o] 9 spike
+        [type] killing
+        [id] 9
+        [pos_y] 0 -> height of path
+        [clock] 0 -> x in milliseconds
+    [o] 10 spike ball
+        [type] killing
+        [id] 10
+        [pos_y] 0 -> max_height
+        [clock] 0 -> x in milliseconds
+
+# build:
+1,0,0|
+
+# end_flag
+    [!] end of file or 0,0,0,x|
