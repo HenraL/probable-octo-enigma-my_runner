@@ -90,15 +90,15 @@ This license applies for the code of this game, however, the licensing for the a
 
 ### Where to find the links to the assets
 
-The links for the assets can be found in the html folder, the temp/html
+The links for the assets can be found in the `files/html` folder, the `files/temp/html`
 
 ### Font authors
 
-The fonts belong to SEGA (NiseSegaSonic.ttf) and Microsoft (Helvetica-Bold.ttf) and their licensing is applied.
+The fonts belong to SEGA (`NiseSegaSonic.ttf`) and Microsoft (`Helvetica-Bold.ttf`) and their licensing is applied.
 
 ### Where are the credits
 
-Crediting for the assets used can be found in the ./runner -c option of the program as well as in the show_credits.c
+Crediting for the assets used can be found in the `./runner -c` option of the program as well as in the `show_credits.c`
 
 ### Ownership
 
