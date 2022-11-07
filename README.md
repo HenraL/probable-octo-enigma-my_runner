@@ -46,9 +46,9 @@ In order to run the game, you will need:
 * To be in a linux environement (a linux in a virtual environement will do)
 * Have basic knowledge of how the linux bash works.
 * Have the following packages installed:
-  * make
-  * gcc
-  * CSFML-devel
+  * make (it is normally installed by default [to make sure, type `make --version`, if the response is not `bash: make: command not found` this means `make` is installed on your system]
+  * gcc [https://www.ubuntupit.com/how-to-install-and-use-gcc-compiler-on-linux-system/](https://www.ubuntupit.com/how-to-install-and-use-gcc-compiler-on-linux-system/) to install gcc if it is not installed.
+  * CSFML-devel [https://github.com/Hanra-s-work/install_csfml](https://github.com/Hanra-s-work/install_csfml)
 * Cloned this repository onto your computer.
 
 ### Compiling
