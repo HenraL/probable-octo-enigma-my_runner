@@ -1,4 +1,6 @@
-# get_csfml_actions_epitech
+# Silver Runner
+
+## Another runner like program
 
 This is a Project that I developed in my first year at Epitech.
 It was the first time I created a game.
