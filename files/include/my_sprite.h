@@ -46,6 +46,7 @@ typedef struct sprite_s {
     sfVector2f scale;
     sfIntRect sprite_rect;
     dim_t d;
+    char *path;
     float previous_scale_x;
     float previous_scale_y;
     int y_step;
@@ -76,15 +77,15 @@ sprite_t load_sprite(char *image_path);
 two_sprites_t load_two_sprite(char *path1, char *path2, float w, float h);
 sprite_t load_character(char *image_path, sfFloatRect char_rect, sfIntRect dim);
 sprite_t load_n_size(char *path, sfFloatRect sheet_rect,
-                     sfIntRect char_rect, sfVector2f rescale);
+    sfIntRect char_rect, sfVector2f rescale);
 sprite_t dup_sprite(const sprite_t source_sprite);
 two_sprites_t initialise_drag_axis(two_sprites_t sprites, int value);
 sfIntRect initialise_sfintrect(int left, int top, int width, int height);
 sfFloatRect initialise_sffloatrect(float left, float top, float width,
-                                   float height);
+    float height);
 anim_t init_anim(sfFloatRect sheet_rect, sfIntRect char_rect);
 void display_sprite(sfRenderWindow *window, sprite_t image,
-                    sfRenderStates *state);
+    sfRenderStates *state);
 sprite_t rescale_sprite(sprite_t default_sprite, float new_x, float new_y);
 sprite_t rescale_sprite_by_percent(sprite_t default_sprite, float fact, int up);
 sprite_t randomise_sprite_pos_y(sprite_t default_sprite, int min_y, int max_y);
@@ -100,9 +101,9 @@ int is_sprite_coliding(sprite_t sprite1, sprite_t sprite2);
 sprite_t is_out_of_home(sprite_t default_sprite, int reset_step);
 sprite_t is_out_of_home_overflow(sprite_t default_sprite, int reset_step);
 sprite_t is_res_pos_req(sprite_t default_sprite, int cond, int pos,
-                        int x_or_y);
+    int x_or_y);
 void draw_two_sprites(sfRenderWindow *window, two_sprites_t sprites,
-                      sfRenderStates *states);
+    sfRenderStates *states);
 two_sprites_t change_two_val(two_sprites_t sprites, int up_or_down, int nb);
 sprite_t override_sprite(sprite_t old, sprite_t new_sp);
 void free_sprite(sprite_t default_sprite);

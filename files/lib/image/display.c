@@ -10,5 +10,5 @@
 void display_image(sfRenderWindow *window, image_t sprite,
                    sfRenderStates *state)
 {
-    sfRenderWindow_drawSprite(window, image.image, state);
+    sfRenderWindow_drawSprite(window, sprite.image, state);
 }

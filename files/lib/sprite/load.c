@@ -10,6 +10,7 @@
 sprite_t load_sprite(char *image_path)
 {
     sprite_t default_sprite;
+    default_sprite.path = image_path;
     default_sprite.texture = sfTexture_createFromFile(image_path, NULL);
     if (!default_sprite.texture) {
         default_sprite.status = 84;
@@ -26,10 +27,21 @@ sprite_t load_sprite(char *image_path)
     return default_sprite;
 }
 
+sfIntRect to_int_rect(sfFloatRect char_rect)
+{
+    sfIntRect data;
+    data.height = (int)char_rect.height;
+    data.left = (int)char_rect.left;
+    data.top = (int)char_rect.top;
+    data.width = (int)char_rect.width;
+    return data;
+}
+
 sprite_t load_character(char *image_path, sfFloatRect char_rect, sfIntRect dim)
 {
     sprite_t default_sprite;
-    default_sprite.texture = sfTexture_createFromFile(image_path, &char_rect);
+    sfIntRect converted = to_int_rect(char_rect);
+    default_sprite.texture = sfTexture_createFromFile(image_path, &converted);
     if (!default_sprite.texture) {
         default_sprite.status = 84;
         return default_sprite;
