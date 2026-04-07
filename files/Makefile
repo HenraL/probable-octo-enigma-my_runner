@@ -20,11 +20,13 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_runner
 
-CSFML_DIR := $(CURDIR)/csfml_lib
+CSFML_DIR := $(CURDIR)/csfml_lib/
 
-CPPFLAGS += -isystem$(CSFML_DIR)/include
+CSFML_DIST_DIR := $(CSFML_DIR)/build/install
 
-LDFLAGS += -L$(CSFML_DIR)/lib/gcc
+CPPFLAGS += -isystem$(CSFML_DIST_DIR)csfml/include -isystem$(CSFML_DIST_DIR)/sfml/include
+
+LDFLAGS += -L$(CSFML_DIST_DIR)csfml/lib -L$(CSFML_DIST_DIR)/sfml/lib
 LDLIBS += -lcsfml-graphics -lcsfml-system -lcsfml-audio
 
 export CPPFLAGS LDFLAGS LDLIBS
@@ -48,8 +50,12 @@ LIB	= 	-L lib/audio -lmyaudio	\
 
 all:	$(NAME)
 
-$(NAME):	$(OBJ)
+build_csfml:
 	$(MAKE) -C $(CSFML_DIR)
+
+$(OBJ): build_csfml
+
+$(NAME):	$(OBJ)
 	$(MAKE) -C lib/audio CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/event CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/my CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
@@ -64,7 +70,8 @@ $(NAME):	$(OBJ)
 	$(MAKE) -C lib/scores CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/image CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/level CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
-	gcc -g $(SRC) -o $(NAME) $(CPPFLAGS) $(LIB) $(LDFLAGS) $(LDLIBS) -g3
+	$(CXX) $(SRC) -o $(NAME) $(CPPFLAGS) $(LIB) $(LDFLAGS) $(LDLIBS) -g3
+
 
 clean:
 	rm -f $(OBJ)
@@ -106,3 +113,5 @@ re:	fclean all
 
 auteur:
 	echo $(USER) > auteur
+
+.PHONY: all build_csfml clean fclean re auteur
