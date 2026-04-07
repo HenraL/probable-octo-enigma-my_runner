@@ -23,39 +23,39 @@ OBJ	=	$(SRC:.c=.o)
 NAME	=	test.out
 all:	$(NAME)
 $(NAME):	$(OBJ)
-	make -C audio
-	make -C convert
-	make -C dict
-	make -C event
-	make -C maths
-	make -C help
-	make -C my
-	make -C sprite
-	make -C window
+	$(MAKE) -C audio CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C convert CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C dict CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C event CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C maths CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C help CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C my CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C sprite CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C window CPPFLAGS="$(CPPFLAGS)"  LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	gcc $(SRC) -o $(NAME) -lcsfml-graphics -lcsfml-system -lcsfml-audio $(LIB)
 
 clean:
 	rm -f $(OBJ)
-	make -C audio clean
-	make -C convert clean
-	make -C dict clean
-	make -C event clean
-	make -C maths clean
-	make -C help clean
-	make -C my clean
-	make -C sprite clean
-	make -C window clean
+	$(MAKE) -C audio clean
+	$(MAKE) -C convert clean
+	$(MAKE) -C dict clean
+	$(MAKE) -C event clean
+	$(MAKE) -C maths clean
+	$(MAKE) -C help clean
+	$(MAKE) -C my clean
+	$(MAKE) -C sprite clean
+	$(MAKE) -C window clean
 fclean: clean
 	rm -f $(NAME)
-	make -C audio fclean
-	make -C convert fclean
-	make -C dict fclean
-	make -C event fclean
-	make -C help fclean
-	make -C maths fclean
-	make -C my fclean
-	make -C sprite fclean
-	make -C window fclean
+	$(MAKE) -C audio fclean
+	$(MAKE) -C convert fclean
+	$(MAKE) -C dict fclean
+	$(MAKE) -C event fclean
+	$(MAKE) -C help fclean
+	$(MAKE) -C maths fclean
+	$(MAKE) -C my fclean
+	$(MAKE) -C sprite fclean
+	$(MAKE) -C window fclean
 
 
 re:	fclean all

@@ -20,7 +20,16 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_runner
 
-LIB	=	-L lib/audio -lmyaudio	\
+CSFML_DIR := $(CURDIR)/csfml_lib
+
+CPPFLAGS += -isystem$(CSFML_DIR)/include
+
+LDFLAGS += -L$(CSFML_DIR)/lib/gcc
+LDLIBS += -lcsfml-graphics -lcsfml-system -lcsfml-audio
+
+export CPPFLAGS LDFLAGS LDLIBS
+
+LIB	= 	-L lib/audio -lmyaudio	\
 		-L lib/my/ -lmy	\
 		-L lib/sprite -lmysprite	\
 		-L lib/mouse -lmymouse	\
@@ -35,58 +44,63 @@ LIB	=	-L lib/audio -lmyaudio	\
 		-L lib/image -lmyimage	\
 		-L lib/level -lmylevel
 
+
+
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	make -C lib/audio
-	make -C lib/event
-	make -C lib/my
-	make -C lib/window
-	make -C lib/sprite
-	make -C lib/mouse
-	make -C lib/silvers
-	make -C lib/text
-	make -C lib/end
-	make -C lib/convert
-	make -C lib/game_assets
-	make -C lib/scores
-	make -C lib/image
-	make -C lib/level
-	gcc -g $(SRC) -o $(NAME) -lcsfml-graphics -lcsfml-system -lcsfml-audio $(LIB) -g3
+	$(MAKE) -C $(CSFML_DIR)
+	$(MAKE) -C lib/audio CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/event CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/my CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/window CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/sprite CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/mouse CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/silvers CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/text CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/end CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/convert CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/game_assets CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/scores CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/image CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	$(MAKE) -C lib/level CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
+	gcc -g $(SRC) -o $(NAME) $(CPPFLAGS) $(LIB) $(LDFLAGS) $(LDLIBS) -g3
 
 clean:
 	rm -f $(OBJ)
-	make -C lib/audio clean
-	make -C lib/event clean
-	make -C lib/my clean
-	make -C lib/window clean
-	make -C lib/sprite clean
-	make -C lib/mouse clean
-	make -C lib/silvers clean
-	make -C lib/text clean
-	make -C lib/end clean
-	make -C lib/convert clean
-	make -C lib/game_assets clean
-	make -C lib/scores clean
-	make -C lib/image clean
-	make -C lib/level clean
+	$(MAKE) -C $(CSFML_DIR) clean
+	$(MAKE) -C lib/audio clean
+	$(MAKE) -C lib/event clean
+	$(MAKE) -C lib/my clean
+	$(MAKE) -C lib/window clean
+	$(MAKE) -C lib/sprite clean
+	$(MAKE) -C lib/mouse clean
+	$(MAKE) -C lib/silvers clean
+	$(MAKE) -C lib/text clean
+	$(MAKE) -C lib/end clean
+	$(MAKE) -C lib/convert clean
+	$(MAKE) -C lib/game_assets clean
+	$(MAKE) -C lib/scores clean
+	$(MAKE) -C lib/image clean
+	$(MAKE) -C lib/level clean
 
 fclean: clean
 	rm -f $(NAME)
-	make -C lib/audio fclean
-	make -C lib/event fclean
-	make -C lib/my fclean
-	make -C lib/window fclean
-	make -C lib/sprite fclean
-	make -C lib/mouse fclean
-	make -C lib/silvers fclean
-	make -C lib/text fclean
-	make -C lib/end fclean
-	make -C lib/convert fclean
-	make -C lib/game_assets fclean
-	make -C lib/scores fclean
-	make -C lib/image fclean
-	make -C lib/level fclean
+	$(MAKE) -C $(CSFML_DIR) fclean
+	$(MAKE) -C lib/audio fclean
+	$(MAKE) -C lib/event fclean
+	$(MAKE) -C lib/my fclean
+	$(MAKE) -C lib/window fclean
+	$(MAKE) -C lib/sprite fclean
+	$(MAKE) -C lib/mouse fclean
+	$(MAKE) -C lib/silvers fclean
+	$(MAKE) -C lib/text fclean
+	$(MAKE) -C lib/end fclean
+	$(MAKE) -C lib/convert fclean
+	$(MAKE) -C lib/game_assets fclean
+	$(MAKE) -C lib/scores fclean
+	$(MAKE) -C lib/image fclean
+	$(MAKE) -C lib/level fclean
 
 re:	fclean all
 

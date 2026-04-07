@@ -1,3 +1,0 @@
-version: 2.5.1
-name: CSFML-2.5.1-windows-64-bit
-system: windows-64-bit

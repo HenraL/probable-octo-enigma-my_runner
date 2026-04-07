@@ -1,0 +1,6 @@
+# Ignore build artifacts
+build/**
+build-sfml/**
+CSFML-2.5/**
+SFML-2.5.1/**
+*.zip
