@@ -18,8 +18,12 @@ if [ $? -ne 0 ]; then
     echo "Build failed"
     exit 1
 fi
+CWD=$(pwd)
+mv -v my_runner files/
+cd files
 if [ $# -gt 0 ]; then
-    ./build/my_runner -h
+    ./my_runner -h
 else
-    ./build/my_runner -l
+    ./my_runner -l
 fi
+cd "$CWD"

@@ -29,28 +29,7 @@ add_executable(my_runner
 # Find the CSFML components
 #find_package(CSFML 2.5 COMPONENTS graphics window system audio REQUIRED)
 
-# Link the libraries
-target_link_libraries(my_runner
-    csfml-graphics
-    csfml-window
-    csfml-system
-    csfml-audio
-    myaudio
-    my
-    mysprite
-    mymouse
-    mywindow
-    myevents
-    mysilvers
-    mytext
-    myend
-    myconvert
-    myassets
-    myscores
-    myimage
-    mylevel
-)
-
+# Build the libraries
 add_subdirectory(lib/audio)
 add_subdirectory(lib/convert)
 add_subdirectory(lib/dict)
@@ -70,4 +49,36 @@ add_subdirectory(lib/silvers)
 add_subdirectory(lib/sprite)
 add_subdirectory(lib/text)
 add_subdirectory(lib/window)
+
+# Link the libraries
+target_link_libraries(my_runner
+    csfml-graphics
+    csfml-window
+    csfml-system
+    csfml-audio
+    my
+    myend
+    mytext
+    mydict
+    mypixel
+    myaudio
+    mymouse
+    myimage
+    mylevel
+    mymaths
+    mysprite
+    mywindow
+    myevents
+    myassets
+    myscores
+    mysilvers
+    myconvert
+)
+
+add_custom_command(TARGET my_runner POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    $<TARGET_FILE:my_runner>
+    ${CMAKE_SOURCE_DIR}/my_runner
+)
+
 

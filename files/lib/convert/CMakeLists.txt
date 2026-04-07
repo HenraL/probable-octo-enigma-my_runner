@@ -10,3 +10,7 @@ add_library(myconvert STATIC
 )
 
 target_include_directories(myconvert PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(myconvert PUBLIC
+    my
+)

@@ -3,3 +3,5 @@
 *.o
 build/**
 files/build/**
+# No binary
+my_runner

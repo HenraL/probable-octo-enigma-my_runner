@@ -8,3 +8,7 @@ add_library(myevents STATIC
 )
 
 target_include_directories(myevents PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(myevents PUBLIC
+    mymouse
+)
