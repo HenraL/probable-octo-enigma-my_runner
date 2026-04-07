@@ -24,10 +24,10 @@ CSFML_DIR := $(CURDIR)/csfml_lib/
 
 CSFML_DIST_DIR := $(CSFML_DIR)/build/install
 
-CPPFLAGS += -isystem$(CSFML_DIST_DIR)csfml/include -isystem$(CSFML_DIST_DIR)/sfml/include
+CPPFLAGS += -isystem$(CSFML_DIST_DIR)/csfml/include -isystem$(CSFML_DIST_DIR)/sfml/include
 
-LDFLAGS += -L$(CSFML_DIST_DIR)csfml/lib -L$(CSFML_DIST_DIR)/sfml/lib
-LDLIBS += -lcsfml-graphics -lcsfml-system -lcsfml-audio
+LDFLAGS += -L$(CSFML_DIST_DIR)/csfml/lib -L$(CSFML_DIST_DIR)/sfml/lib
+LDLIBS += -lcsfml-graphics -lcsfml-system -lcsfml-audio -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 export CPPFLAGS LDFLAGS LDLIBS
 
@@ -70,7 +70,18 @@ $(NAME):	$(OBJ)
 	$(MAKE) -C lib/scores CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/image CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
 	$(MAKE) -C lib/level CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LDLIBS="$(LDLIBS)"
-	$(CXX) $(SRC) -o $(NAME) $(CPPFLAGS) $(LIB) $(LDFLAGS) $(LDLIBS) -g3
+	$(CXX) $(OBJ) -o $(NAME) $(CPPFLAGS) -Wl,--start-group $(LIB) $(LDFLAGS) $(LDLIBS) -Wl,--end-group $(SYS_LIBS) -g3
+
+run: $(NAME)
+	@read -p "Program args (optional): " ARGS; \
+	LDPRE=""; \
+	for f in $(CSFML_DIST_DIR)/csfml/lib/*.so $(CSFML_DIST_DIR)/sfml/lib/*.so; do \
+		[ -f "$$f" ] || continue; \
+		if [ "$$LDPRE" = "" ]; then LDPRE="$$f"; else LDPRE="$$LDPRE:$$f"; fi; \
+	done; \
+	if [ "$$LDPRE" != "" ]; then export LD_PRELOAD="$$LDPRE"; fi; \
+	echo "Running: LD_PRELOAD=$$LD_PRELOAD ./$(NAME) $$ARGS"; \
+	LD_PRELOAD="$$LDPRE" ./$(NAME) $$ARGS
 
 
 clean:
@@ -114,4 +125,4 @@ re:	fclean all
 auteur:
 	echo $(USER) > auteur
 
-.PHONY: all build_csfml clean fclean re auteur
+.PHONY: all build_csfml clean fclean re auteur run

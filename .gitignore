@@ -1,2 +1,5 @@
+# No build artifacts
 *.a
 *.o
+build/**
+files/build/**

@@ -1,7 +1,7 @@
 {
     "folders": [
         {
-            "path": "."
+            "path": ".."
         }
     ],
     "settings": {
@@ -25,46 +25,6 @@
             "my_image.h": "c"
         },
         "git.ignoreLimitWarning": true,
-        "cSpell.enabledLanguageIds": [
-            "asciidoc",
-            "c",
-            "cpp",
-            "csharp",
-            "css",
-            "elixir",
-            "git-commit",
-            "go",
-            "graphql",
-            "handlebars",
-            "haskell",
-            "html",
-            "jade",
-            "java",
-            "javascript",
-            "javascriptreact",
-            "json",
-            "jsonc",
-            "jupyter",
-            "latex",
-            "less",
-            "markdown",
-            "php",
-            "plaintext",
-            "python",
-            "pug",
-            "restructuredtext",
-            "rust",
-            "scala",
-            "scss",
-            "swift",
-            "text",
-            "typescript",
-            "typescriptreact",
-            "vue",
-            "yaml",
-            "yml",
-            "COBOL",
-            "ACUCOBOL"
-        ]
+        "asperheader.promptToCreateIfMissing": false
     }
 }
