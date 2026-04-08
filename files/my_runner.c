@@ -26,7 +26,8 @@
 
 
 
-int launch_game(void) {
+int launch_game(void)
+{
     // lest_inf_t level = get_level("level/runner1.runner");
     music_status_t sandstorm;
     sandstorm.path = "ogg/darun_sandstorm.ogg";
@@ -49,9 +50,9 @@ int launch_game(void) {
     sfRenderWindow *window;
     framebuffer_t *fb;
 
-    sfColor my_yellow = rgba(249, 235, 0, 1);
-    sfColor my_white = rgba(248, 248, 249, 1);
-    sfColor my_grey = rgba(192, 192, 192, 1);
+    sfColor my_yellow = my_rgba(249, 235, 0, 1);
+    sfColor my_white = my_rgba(248, 248, 249, 1);
+    sfColor my_grey = my_rgba(192, 192, 192, 1);
     text_t score1 = init_text_simp("score: ", 1, my_yellow, 1);
     text_t score2 = init_text_simp("0", 1, my_white, 1);
     text_t time1 = init_text_simp("time: ", 1, my_yellow, 1);
@@ -67,22 +68,22 @@ int launch_game(void) {
     max_t max = init_window_size(1920, 1080);
     sfVector2f scale = { 30 , sfTrue };
     sprite_t but_sprite1 = load_n_size(my_images.button_path,
-                                       initialise_sffloatrect(0, 0, 276, 44),
-                                       initialise_sfintrect(0, 0, 138, 44),
-                                       scale);
+        initialise_sffloatrect(0, 0, 276, 44),
+        initialise_sfintrect(0, 0, 138, 44),
+        scale);
     sprite_t but_sprite4 = load_n_size(my_images.button_path,
-                                       initialise_sffloatrect(0, 0, 276, 44),
-                                       initialise_sfintrect(0, 0, 138, 44),
-                                       scale);
+        initialise_sffloatrect(0, 0, 276, 44),
+        initialise_sfintrect(0, 0, 138, 44),
+        scale);
     sprite_t but_sprite_r = load_n_size(my_images.button_path,
-                                        initialise_sffloatrect(0, 0, 276, 44),
-                                        initialise_sfintrect(0, 0, 138, 44),
-                                        scale);
+        initialise_sffloatrect(0, 0, 276, 44),
+        initialise_sfintrect(0, 0, 138, 44),
+        scale);
     sfVector2i my_pos = { 0,200 };
     text_t title1 = init_title_simp("SILVER", 1, my_pos, sfTextBold);
     my_pos.x = -600;
     text_t title2 = init_title_simp("RUNNER", 1, my_pos, sfTextBold |
-                                    sfTextItalic);
+        sfTextItalic);
     sfVector2i my_pos2 = { -300, 930 };
     text_t description1_1 = init_desc_simp("Play Game", 2, 30, my_pos2);
     text_t description4_1 = init_desc_simp("Exit", 2, 30, my_pos2);
@@ -109,11 +110,11 @@ int launch_game(void) {
     sfVector2f scale_s = { 150, sfTrue };
     end_values_t ends = initialise_end_values(
         load_n_size(my_images.end_sprite_won_path,
-                    initialise_sffloatrect(0, 0, 1680, 521),
-                    initialise_sfintrect(0, 0, 419, 525), scale),
+            initialise_sffloatrect(0, 0, 1680, 521),
+            initialise_sfintrect(0, 0, 419, 525), scale),
         load_n_size(my_images.end_sprite_lost_path,
-                    initialise_sffloatrect(0, 0, 278, 38),
-                    initialise_sfintrect(0, 0, 46, 38), scale_s), 0);
+            initialise_sffloatrect(0, 0, 278, 38),
+            initialise_sfintrect(0, 0, 46, 38), scale_s), 0);
     ends.sprite_won.anim.max_ticks = 15;
     ends.sprite_won.anim.wrap = sfTrue;
     ends.sprite_lost.anim.max_ticks = 25;
@@ -127,21 +128,21 @@ int launch_game(void) {
     scale.y = sfFalse;
     scale.x = 80;
     sprite_t spike_sprite = load_n_size(my_images.spike_path,
-                                        initialise_sffloatrect(0, 0, 373, 397),
-                                        initialise_sfintrect(0, 0, 373, 397),
-                                        scale);
+        initialise_sffloatrect(0, 0, 373, 397),
+        initialise_sfintrect(0, 0, 373, 397),
+        scale);
     spike_sprite.d.x = max.w;
     spike_sprite.d.y = 680;
     sprite_t spike2_sprite = spike_sprite;
     scale.x = 60;
     sprite_t ob2_sprite = load_n_size(my_images.obstacle2_path,
-                                      initialise_sffloatrect(0, 0, 235, 233),
-                                      initialise_sfintrect(0, 0, 235, 233),
-                                      scale);
+        initialise_sffloatrect(0, 0, 235, 233),
+        initialise_sfintrect(0, 0, 235, 233),
+        scale);
     sprite_t rock_sprite = load_n_size(my_images.asteroid_path,
-                                       initialise_sffloatrect(0, 0, 510, 500),
-                                       initialise_sfintrect(0, 0, 89, 104),
-                                       scale);
+        initialise_sffloatrect(0, 0, 510, 500),
+        initialise_sfintrect(0, 0, 89, 104),
+        scale);
     rock_sprite.anim.max_ticks = 5;
     rock_sprite.anim.step_w = 85;
     rock_sprite.anim.step_h = 98;
@@ -149,9 +150,9 @@ int launch_game(void) {
     rock_sprite = move_sprite(rock_sprite, max.w - 30, 100);
     scale.y = sfTrue;
     sprite_t bomb_sprite = load_n_size(my_images.bomb_path,
-                                       initialise_sffloatrect(0, 0, 48, 26),
-                                       initialise_sfintrect(0, 0, 24, 26),
-                                       scale);
+        initialise_sffloatrect(0, 0, 48, 26),
+        initialise_sfintrect(0, 0, 24, 26),
+        scale);
     bomb_sprite.anim.max_ticks = 35;
     bomb_sprite.anim.step_w = 24;
     bomb_sprite.anim.wrap = sfTrue;
@@ -164,10 +165,10 @@ int launch_game(void) {
     scale.y = sfTrue;
     scale.x = 90;
     sprite_t spike_ball_sprite = load_n_size(my_images.spike_ball_path,
-                                             initialise_sffloatrect(0, 0, 72,
-                                                                    17),
-                                             initialise_sfintrect(0, 0, 18, 17),
-                                             scale);
+        initialise_sffloatrect(0, 0, 72,
+            17),
+        initialise_sfintrect(0, 0, 18, 17),
+        scale);
     spike_ball_sprite.anim.max_ticks = 35;
     spike_ball_sprite.anim.step_w = 18;
     spike_ball_sprite.anim.wrap = sfTrue;
@@ -176,36 +177,36 @@ int launch_game(void) {
     scale.x = 60;
     scale.x = 200;
     sprite_t rocket_sprite = load_n_size(my_images.rocket_path,
-                                         initialise_sffloatrect(0, 0, 234, 12),
-                                         initialise_sfintrect(0, 0, 56, 12),
-                                         scale);
+        initialise_sffloatrect(0, 0, 234, 12),
+        initialise_sfintrect(0, 0, 56, 12),
+        scale);
     rocket_sprite.anim.max_ticks = 5;
     rocket_sprite.anim.step_w = 56;
     rocket_sprite.anim.wrap = sfTrue;
     rocket_sprite = move_sprite(rocket_sprite, max.w - 30, 650);
     scale.x = 60;
     sprite_t rings_w_sprite = load_n_size(my_images.rings_winter_path,
-                                          initialise_sffloatrect(0, 0, 1782,
-                                                                 66),
-                                          initialise_sfintrect(0, 0, 66, 66),
-                                          scale);
+        initialise_sffloatrect(0, 0, 1782,
+            66),
+        initialise_sfintrect(0, 0, 66, 66),
+        scale);
     rings_w_sprite.anim.max_ticks = 5;
     rings_w_sprite.anim.step_w = 66;
     rings_w_sprite.anim.wrap = sfTrue;
     rings_w_sprite = move_sprite(rings_w_sprite, 0, 14);
     sprite_t ring_w_sprite2 = load_n_size(my_images.rings_winter_path,
-                                          initialise_sffloatrect(0, 0, 1782,
-                                                                 66),
-                                          initialise_sfintrect(0, 0, 66, 66),
-                                          scale);
+        initialise_sffloatrect(0, 0, 1782,
+            66),
+        initialise_sfintrect(0, 0, 66, 66),
+        scale);
     ring_w_sprite2.anim.max_ticks = 5;
     ring_w_sprite2.anim.step_w = 66;
     ring_w_sprite2.anim.wrap = sfTrue;
     ring_w_sprite2 = move_sprite(ring_w_sprite2, 0, 681);
     scale.y = 1;
     silver_states_t silvers = load_the_silvers(my_images.silver_s_path,
-                                               my_images.silver_n_path,
-                                               my_images.silver_f_path, scale);
+        my_images.silver_n_path,
+        my_images.silver_f_path, scale);
     sprite_t silver_sprite = silvers.silver_f_sprite;
     silver_sprite.home_position.x = 150;
     silver_sprite.home_position.y = 680;
@@ -249,11 +250,10 @@ int launch_game(void) {
         evt_actions.silver = silver_sprite;
         evt_actions.global_speed = is_it.global_speed;
         evt_actions.buttons = initialise_button(but_sprite1, but_sprite1,
-                                                but_sprite1, but_sprite4);
+            but_sprite1, but_sprite4);
         evt_actions.buttons.restart = but_sprite_r;
         sfRenderWindow_setFramerateLimit(window, 120);
-        while (sfRenderWindow_pollEvent(window, &event))
-        {
+        while (sfRenderWindow_pollEvent(window, &event)) {
             evt_actions = on_event(event, evt_actions);
             silver_sprite = evt_actions.silver;
             window = evt_actions.window;
@@ -264,7 +264,7 @@ int launch_game(void) {
             but_sprite4 = evt_actions.buttons.button4;
             but_sprite_r = evt_actions.buttons.restart;
             mouse_sprite = mouse_update_pos(event, mouse_sprite,
-                                            rings_w_sprite);
+                rings_w_sprite);
         }
         silver_sprite = next_frame(silver_sprite, time.silver);
         if (silver_sprite.anim.counter_reset == sfTrue) {
@@ -347,18 +347,18 @@ int launch_game(void) {
             // rock_sprite = is_res_pos_req(rock_sprite, max.h,
             // (rock_sprite.d.h * -1), 1);
             bomb_sprite = is_res_pos_req(bomb_sprite, 0, (max.w +
-                                                          bomb_sprite.d.x), 0);
+                bomb_sprite.d.x), 0);
             river_sprite = is_res_pos_req(river_sprite, (max.w * -1),
-                                          (max.w - 200), 0);
+                (max.w - 200), 0);
             spike_ball_sprite = is_res_pos_req(spike_ball_sprite, 0,
-                                               (max.w + spike_ball_sprite.d.w)
-                                               , 0);
+                (max.w + spike_ball_sprite.d.w)
+                , 0);
             rocket_sprite = is_res_pos_req(rock_sprite, 0,
-                                           (max.w + rocket_sprite.d.w), 0);
+                (max.w + rocket_sprite.d.w), 0);
             if (ring_w_sprite2.d.x <= 0) {
                 ring_w_sprite2.d.x = max.w + ring_w_sprite2.d.w;
                 ring_w_sprite2 = randomise_sprite_pos_y(ring_w_sprite2, 600,
-                                                        700);
+                    700);
             }
             if (is_sprite_coliding(silver_sprite, ring_w_sprite2) == 1) {
                 ring_sound = play_as_sound(ring_sound);

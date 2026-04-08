@@ -27,6 +27,7 @@ text_t init_text(char *string, int my_font_choice, unsigned int font_size)
     my_text.text = sfText_create();
     sfText_setString(my_text.text, string);
     sfText_setFont(my_text.text, my_text.font);
+    sfText_setColor(my_text.text, sfWhite);
     sfText_setCharacterSize(my_text.text, font_size);
     my_text.font_size = font_size;
     my_text.string = string;

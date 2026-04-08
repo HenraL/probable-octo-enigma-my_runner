@@ -9,7 +9,7 @@ add_library(mytext STATIC
     move.c
     move_from_struct_coordinates.c
     positioning.c
-    rgba.c
+    my_rgba.c
     set_colors.c
     set_more_info.c
     update.c
