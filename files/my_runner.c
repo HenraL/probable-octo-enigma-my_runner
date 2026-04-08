@@ -214,7 +214,7 @@ int launch_game(void)
     silver_sprite.position.y = 680;
     scale.x = 60;
     scale.y = sfFalse;
-    sfEvent event;
+    sfEvent event = { 0 };
     init_bkgd_t init_bkgd = init_backgrounds(my_images);
     if (init_bkgd.status == 84) {
         return 84;

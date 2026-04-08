@@ -4,6 +4,13 @@ project(MyRunner C)
 
 set(CMAKE_C_STANDARD 99)
 
+# Set a default build type if none was specified
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
 if(UNIX) 
     message(STATUS "CSFML requires the following dependencies: libxrandr-dev  libxcursor-dev libxi-dev libudev-dev libfreetype-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev")
 endif()

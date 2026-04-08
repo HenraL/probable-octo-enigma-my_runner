@@ -7,10 +7,25 @@
 
 #include "../../include/my_convert.h"
 
+char *nb_to_char_star_allocate(int nb)
+{
+    int len = length_of_an_int(nb);
+    char *result = NULL;
+    if (nb == 0) {
+        len = 1;
+    }
+    result = malloc(sizeof(char) * (len + 1));
+    return result;
+}
+
 char *nb_to_char_star(int nb)
 {
-    char *result = malloc(sizeof(char) * length_of_an_int(nb));
     int i = 0;
+    char *result = nb_to_char_star_allocate(nb);
+    if (result == NULL) {
+        return NULL;
+    }
+
     if (nb > 0) {
         for (; nb != 0; i++) {
             result[i] = (nb % 10) + '0';
