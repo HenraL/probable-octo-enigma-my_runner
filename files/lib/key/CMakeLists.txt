@@ -6,3 +6,5 @@ add_library(mykey STATIC
 )
 
 target_include_directories(mykey PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(mykey PUBLIC csfml-local)

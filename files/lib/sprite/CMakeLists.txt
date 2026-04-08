@@ -31,4 +31,6 @@ target_include_directories(mysprite PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(mysprite PUBLIC
     mymaths
+    csfml-graphics
+    csfml-local
 )

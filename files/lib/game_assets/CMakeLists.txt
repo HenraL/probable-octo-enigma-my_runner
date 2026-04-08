@@ -8,3 +8,5 @@ add_library(myassets STATIC
 )
 
 target_include_directories(myassets PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(myassets PUBLIC csfml-graphics csfml-local)

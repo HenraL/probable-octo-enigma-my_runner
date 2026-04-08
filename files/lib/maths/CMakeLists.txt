@@ -7,3 +7,5 @@ add_library(mymaths STATIC
 )
 
 target_include_directories(mymaths PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(mymaths PUBLIC csfml-system csfml-local)

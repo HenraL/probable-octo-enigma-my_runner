@@ -4,16 +4,23 @@ project(MyRunner C)
 
 set(CMAKE_C_STANDARD 99)
 
+if(UNIX) 
+    message(STATUS "CSFML requires the following dependencies: libxrandr-dev  libxcursor-dev libxi-dev libudev-dev libfreetype-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev")
+endif()
+
+# Add rpath to the executable to find local .so files at runtime
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'${CSFML_LIB_DIR}'")
+
+# Add the CSFML build
 add_subdirectory(csfml_lib)
 
-# Tell CMake where to find the local CSFML headers
-include_directories(csfml_lib/include)
+# # Explicitly define the path to your local CSFML libraries
+# set(CSFML_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/install/include)
+# set(CSFML_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build/install/lib)
+# set(CMAKE_FIND_LIBRARY_SUFFIXES ".so;.a")
 
-# Tell CMake where to find the local CSFML libraries
-link_directories(csfml_lib/lib)
-
-# Add the executable
-add_executable(my_runner
+# Set the source files
+set(SOURCES 
     my_runner.c
     init_window.c
     init_backgrounds.c
@@ -26,53 +33,22 @@ add_executable(my_runner
     init_background_overflow.c
 )
 
-# Find the CSFML components
-#find_package(CSFML 2.5 COMPONENTS graphics window system audio REQUIRED)
+# Add the executable
+add_executable(my_runner ${SOURCES})
 
-# Build the libraries
-add_subdirectory(lib/audio)
-add_subdirectory(lib/convert)
-add_subdirectory(lib/dict)
-add_subdirectory(lib/end)
-add_subdirectory(lib/event)
-add_subdirectory(lib/game_assets)
-add_subdirectory(lib/help)
-add_subdirectory(lib/image)
-add_subdirectory(lib/key)
-add_subdirectory(lib/level)
-add_subdirectory(lib/maths)
-add_subdirectory(lib/mouse)
-add_subdirectory(lib/my)
-add_subdirectory(lib/pixel)
-add_subdirectory(lib/scores)
-add_subdirectory(lib/silvers)
-add_subdirectory(lib/sprite)
-add_subdirectory(lib/text)
-add_subdirectory(lib/window)
+# Add our libraries and their dependencies (including CSFML)
+add_subdirectory(lib)
 
-# Link the libraries
-target_link_libraries(my_runner
-    csfml-graphics
-    csfml-window
-    csfml-system
-    csfml-audio
-    my
-    myend
-    mytext
-    mydict
-    mypixel
-    myaudio
-    mymouse
-    myimage
-    mylevel
-    mymaths
-    mysprite
-    mywindow
-    myevents
-    myassets
-    myscores
-    mysilvers
-    myconvert
+# Link the final executable against our global interface library.
+# This single target now provides all project libraries and all dependencies.
+target_link_libraries(my_runner PRIVATE global_dependencies)
+
+# Custom command to copy the executable to the root 'files' directory after build
+add_custom_command(TARGET my_runner POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    $<TARGET_FILE:my_runner>
+    ${CMAKE_CURRENT_SOURCE_DIR}/my_runner
+    COMMENT "Copying executable to root project directory"
 )
 
 add_custom_command(TARGET my_runner POST_BUILD

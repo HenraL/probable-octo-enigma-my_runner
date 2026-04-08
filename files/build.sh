@@ -1,25 +1,17 @@
-#!/bin/bash
-##
-## EPITECH PROJECT, 2025
-## probable-octo-enigma-my_runner
-## File description:
-## build.sh
-##
-
-rm -rf build
+#!/usr/bin/env bash
+CWD=$(pwd)
+rm -rf build my_runner
 mkdir -p build
-cmake -S . -B build
+cmake -S . -B ./build
 if [ $? -ne 0 ]; then
     echo "CMake configuration failed"
     exit 1
 fi
-cmake --build build
+cd build
+make VERBOSE=1
 if [ $? -ne 0 ]; then
+    cd "$CWD"
     echo "Build failed"
     exit 1
 fi
-if [ $# -gt 0 ]; then
-    ./my_runner -h
-else
-    ./my_runner -l
-fi
+cd "$CWD"

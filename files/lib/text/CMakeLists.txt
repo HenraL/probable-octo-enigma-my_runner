@@ -16,3 +16,5 @@ add_library(mytext STATIC
 )
 
 target_include_directories(mytext PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(mytext PUBLIC csfml-graphics csfml-local)

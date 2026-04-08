@@ -13,6 +13,4 @@ add_library(myaudio STATIC
 
 target_include_directories(myaudio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(myaudio PUBLIC
-    csfml-audio
-)
+target_link_libraries(myaudio PUBLIC csfml-local)

@@ -8,3 +8,5 @@ add_library(mysilvers STATIC
 )
 
 target_include_directories(mysilvers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(mysilvers PUBLIC mysprite)

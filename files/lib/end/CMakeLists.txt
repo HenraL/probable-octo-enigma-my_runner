@@ -5,3 +5,4 @@ add_library(myend STATIC
 )
 
 target_include_directories(myend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(myend PUBLIC mysprite mytext)

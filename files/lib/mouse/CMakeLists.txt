@@ -9,3 +9,5 @@ add_library(mymouse STATIC
 )
 
 target_include_directories(mymouse PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(mymouse PUBLIC csfml-window csfml-local)

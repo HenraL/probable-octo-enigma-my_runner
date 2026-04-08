@@ -6,3 +6,5 @@ add_library(myimage STATIC
 )
 
 target_include_directories(myimage PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(myimage PUBLIC csfml-local)
